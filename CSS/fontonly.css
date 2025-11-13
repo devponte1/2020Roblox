@@ -1,0 +1,38 @@
+/* fontonly.css */
+
+/* ==== FONTS ==== */
+
+@font-face {
+    font-family: "GothamSSm";
+    font-weight: 300;
+    src: url("https://css.rbxcdn.com/38e00f7de6f417aa3a458560a15e2b8a-GothamSSm-Light.woff2") format("woff2");
+}
+@font-face {
+    font-family: "GothamSSm";
+    font-weight: 400;
+    src: url("https://css.rbxcdn.com/6eafc48312528e2515d622428b6b95cc-GothamSSm-Book.woff2") format("woff2");
+}
+@font-face {
+    font-family: "GothamSSm";
+    font-weight: 500;
+    src: url("https://css.rbxcdn.com/66d562e3299ee732a53db150038c026e-GothamSSm-Medium.woff2") format("woff2");
+}
+@font-face {
+    font-family: "GothamSSm";
+    font-weight: 600;
+    src: url("https://css.rbxcdn.com/66d562e3299ee732a53db150038c026e-GothamSSm-Medium.woff2") format("woff2");
+}
+@font-face {
+    font-family: "GothamSSm";
+    font-weight: 700;
+    src: url("https://css.rbxcdn.com/3c102ace52ea35b16da4383819acfa38-GothamSSm-Bold.woff2") format("woff2");
+}
+@font-face {
+    font-family: "GothamSSm";
+    font-weight: 900;
+    src: url("https://css.rbxcdn.com/0acd8ff34f3a5c177d02e9011ee74eb3-GothamSSm-Black.woff2") format("woff2");
+}
+
+* {
+    font-family: "GothamSSm", Arial, sans-serif !important;
+}

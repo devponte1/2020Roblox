@@ -1,0 +1,282 @@
+/*content.css*/
+
+/* ==== FONTS ==== */
+
+@font-face {
+    font-family: "GothamSSm";
+    font-weight: 300;
+    src: url("https://css.rbxcdn.com/38e00f7de6f417aa3a458560a15e2b8a-GothamSSm-Light.woff2") format("woff2");
+}
+@font-face {
+    font-family: "GothamSSm";
+    font-weight: 400;
+    src: url("https://css.rbxcdn.com/6eafc48312528e2515d622428b6b95cc-GothamSSm-Book.woff2") format("woff2");
+}
+@font-face {
+    font-family: "GothamSSm";
+    font-weight: 500;
+    src: url("https://css.rbxcdn.com/66d562e3299ee732a53db150038c026e-GothamSSm-Medium.woff2") format("woff2");
+}
+@font-face {
+    font-family: "GothamSSm";
+    font-weight: 600;
+    src: url("https://css.rbxcdn.com/66d562e3299ee732a53db150038c026e-GothamSSm-Medium.woff2") format("woff2");
+}
+@font-face {
+    font-family: "GothamSSm";
+    font-weight: 700;
+    src: url("https://css.rbxcdn.com/3c102ace52ea35b16da4383819acfa38-GothamSSm-Bold.woff2") format("woff2");
+}
+@font-face {
+    font-family: "GothamSSm";
+    font-weight: 900;
+    src: url("https://css.rbxcdn.com/0acd8ff34f3a5c177d02e9011ee74eb3-GothamSSm-Black.woff2") format("woff2");
+}
+
+* {
+    font-family: "GothamSSm", Arial, sans-serif !important;
+}
+
+
+/* ==== COLORS ==== */
+
+.rbx-body.light-theme {
+    --color-bg-page: #f2f4f5;
+    --color-bg-header: #dee1e3;
+    --color-border-header: #c7cbce;
+
+    --color-bg-input: #fefefe;
+    --color-border-input: #393B3D33;
+
+    --color-bg-surface: #ffffff;
+    --color-bg-item: #0000001A;
+    --color-bg-toolbar: #fefefe;
+
+    --color-text-primary: #393b3d;
+    --color-text-secondary: #606162;
+}
+
+.rbx-body.dark-theme {
+    --color-bg-page: #232527;
+    --color-bg-header: #191b1d;
+    --color-border-header: #111214;
+
+    --color-bg-input: #0a0b0c;
+    --color-border-input: #393B3D33;
+
+    --color-bg-surface: #393b3d;
+    --color-bg-item: #393b3d;
+    --color-bg-toolbar: #050505;
+
+    --color-text-primary: #ffffff;
+    --color-text-secondary: #606162;
+}
+
+
+/* ==== PAGE HEADER ==== */
+
+.rbx-left-col {
+    background-color: var(--color-bg-header) !important;
+}
+
+.rbx-left-col.nav-show {
+    background-color: var(--color-bg-header) !important;
+}
+
+.navbar-fixed-top.rbx-header {
+    background-color: var(--color-bg-header) !important;
+    border-color: var(--color-border-header) !important;
+}
+
+.simplebar-content-wrapper {
+    background-color: var(--color-bg-header) !important;
+}
+
+.rbx-header .navbar-search .input-group {
+    overflow: hidden;
+    background-color: transparent !important;
+}
+
+.navbar-search-input {
+    border-color: var(--color-border-input) !important;
+}
+
+.notification-stream-header {
+    background-color: var(--color-bg-header) !important;
+}
+
+.chat-windows-header {
+    background-color: var(--color-bg-header) !important;
+}
+
+
+/* ==== PAGE BACKGROUND ==== */
+
+html,
+body,
+.rbx-body,
+.dialog-body,
+.content,
+.page-content,
+.content-container,
+.container,
+#container-main,
+.container-footer,
+#wrap,
+[id^="scrollbar_"],
+.rbx-scrollbar {
+    background-color: var(--color-bg-page) !important;
+}
+
+
+/* ==== TEXT COLORS ==== */
+
+#horizontal-tabs li.rbx-tab a.rbx-tab-heading span.text-lead:not([style*="color: #ffffff"]) {
+    color: var(--color-text-primary) !important;
+}
+
+#horizontal-tabs li.rbx-tab[style*="color: #ffffff"],
+#horizontal-tabs li.rbx-tab.active,
+#horizontal-tabs li.rbx-tab.active a.rbx-tab-heading,
+#horizontal-tabs li.rbx-tab.active a.rbx-tab-heading span.text-lead {
+    color: inherit !important;
+}
+
+
+/* ==== SEARCH / INPUTS ==== */
+
+.input-group {
+    background-color: var(--color-bg-input) !important;
+    color: var(--color-text-primary) !important;
+}
+
+.input-field {
+    background-color: var(--color-bg-input) !important;
+    color: var(--color-text-primary) !important;
+}
+
+.dialog-input {
+    background-color: var(--color-bg-input) !important;
+    color: var(--color-text-primary) !important;
+}
+
+.form-control.input-field {
+    background-color: var(--color-bg-input) !important;
+}
+
+
+/* ==== TABS ==== */
+
+ul.nav.nav-tabs {
+    background-color: var(--color-bg-surface) !important;
+}
+
+ul.nav.nav-tabs li a.rbx-tab-heading {
+    background-color: var(--color-bg-surface) !important;
+}
+
+ul.nav.nav-tabs li.active a.rbx-tab-heading {
+    background-color: var(--color-bg-surface) !important;
+}
+
+nav.nav-tabs {
+    background-color: var(--color-bg-surface) !important;
+}
+
+.stack-row {
+    background-color: var(--color-bg-surface) !important;
+}
+
+.rbx-tab-heading {
+    background-color: var(--color-bg-surface) !important;
+}
+
+.tab-horizontal-submenu.section-content.six-column {
+    background-color: var(--color-bg-surface) !important;
+}
+
+.item-list-container.layer {
+    background-color: var(--color-bg-header) !important;
+}
+
+
+/* ==== ITEMS ==== */ 
+
+.item-card-thumb,
+.item-card-thumb * {
+background-color: var(--color-bg-item) !important;
+}
+
+.item-card-thumb-container-inner,
+.item-card-thumb-container-inner * {
+ background-color: var(--color-bg-item) !important;
+}
+
+
+/* ==== SCROLLERS ==== */ 
+
+.scroller.prev {
+ background-color: var(--color-bg-header) !important;
+}
+
+.scroller.next {
+ background-color: var(--color-bg-header) !important;
+}
+
+
+/* ==== OTHER ==== */
+
+.section-content-off {
+    background-color: var(--color-bg-surface) !important;
+}
+
+.container-list.layer.recommendations-container {
+    background-color: var(--color-bg-header) !important;
+}
+
+.profile-header-main {
+    background-color: var(--color-bg-surface) !important;
+}
+
+section.profile-header.ng-isolate-scope {
+    background-color: var(--color-bg-surface) !important;
+}
+
+.avatar-card-content {
+    background-color: var(--color-bg-surface) !important;
+}
+
+.avatar-card-btns {
+    background-color: var(--color-bg-surface) !important;
+}
+
+.col-sm-6.section-content.profile-avatar-left {
+    background-color: var(--color-bg-header) !important;
+}
+
+.col-sm-6.slide-item-container-left{
+    background-color: var(--color-bg-header) !important;
+}
+
+.dialog-message.message-is-sending {
+ background-color: var(--color-bg-surface) !important;
+}
+
+.dialog-message.trusted-comms {
+ background-color: var(--color-bg-surface) !important;
+}
+
+.rbx-platform-event-thumbnail {
+    border-radius: 0px !important;
+}
+
+
+/* ==== NEW FEATURES BUT WITH THE 2020 THEME ==== */
+
+.osa-context-card-content {
+    background-color: var(--color-bg-surface) !important;
+}
+
+.avatar.avatar-headshot-md.player-avatar.hidden-players-placeholder {
+    background-color: var(--color-bg-surface) !important;
+}

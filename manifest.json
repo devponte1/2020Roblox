@@ -1,0 +1,36 @@
+{
+  "manifest_version": 3,
+  "name": "2020 - 2021 Roblox Theme",
+  "version": "1.0",
+  "description": "bring back the 2020 theme. the website's functionality stays mostly the same, but the theme is what changes.",
+  "permissions": ["scripting", "activeTab"],
+  "host_permissions": ["https://*.roblox.com/*"],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.roblox.com/*"
+      ],
+      "exclude_matches": [
+        "https://create.roblox.com/*",
+        "https://www.roblox.com/*"
+      ],
+      "css": ["./CSS/fontonly-fonts.roblox.com.css"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://www.roblox.com/*"
+      ],
+      "js": ["./JS/content.js"],
+      "css": ["./CSS/content.css"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://create.roblox.com/*"
+      ],
+      "css": ["./CSS/fontonly-fonts.roblox.com.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}
