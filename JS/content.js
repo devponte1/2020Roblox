@@ -271,7 +271,8 @@ const deleteElements = [
 ];
 
 
-// ==== FUNCTION CALLS ==== //
+// ==================== - FUNCTIONS - ========================= //
+
 
 img_replacements.forEach(rep => replaceImage(rep.toReplace, rep.replaceWith));
 color_replacements.forEach(rep => replaceColor([rep]));
@@ -289,8 +290,6 @@ if (document.readyState === 'loading') {
   replaceElement(element_replacements);
 }
 
-
-// ==== FUNCTIONS ==== //
 
 
 
@@ -659,7 +658,7 @@ function deleteElement(maxAttempts = 10, delay = 500) {
 }
 
 
-// ==== REVERT 2022+ UPDATES ==== //
+// ==================== - REVERT 2022+ UPDATES - ========================= //
 
 
 function changeFavicon(iconURL) {
@@ -669,10 +668,9 @@ function changeFavicon(iconURL) {
 
     const testURL = iconURL + "?v=" + Date.now();
 
-    // Check if favicon exists
     fetch(testURL, { method: "HEAD" })
         .then(res => {
-            if (!res.ok) return; // stop if favicon doesn't exist
+            if (!res.ok) return;
             let link = document.querySelector("link[rel~='icon']");
             if (!link) {
                 link = document.createElement("link");
@@ -685,8 +683,8 @@ function changeFavicon(iconURL) {
                 if (l !== link) l.remove();
             });
         })
-        .catch(() => {}); // fail silently
+        .catch(() => {});
 }
 
 
-// ==== EXPERIMENTAL ==== //
+// ==================== - EXPERIMENTAL - ========================= //
