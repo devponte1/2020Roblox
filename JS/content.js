@@ -247,17 +247,8 @@ color_replacements.forEach(rep => replaceColor([rep]));
 replaceText(text_replacements);
 replaceClass(class_replacements);
 
+deleteElement();
 changeFavicon("./favicon.ico");
-
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () =>
-    replaceElement(element_replacements)
-  );
-} else {
-  replaceElement(element_replacements);
-}
-
-
 
 
 function replaceImage(targetURL, newURL) {
