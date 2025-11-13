@@ -201,38 +201,6 @@ const class_replacements = [
 
 const element_replacements = [
 
-  {
-    toReplace:
-    `<ul class="profile-tabs flex">
-      <li class="justify-center flex fill">
-        <a id="tab-about" href="#about" class="profile-tab active justify-center text-label-medium padding-bottom-xlarge padding-top-medium flex fill">
-          About
-        </a>
-      </li>
-      <li class="justify-center flex fill">
-        <a id="tab-creations" href="#creations" class="profile-tab justify-center text-label-medium padding-bottom-xlarge padding-top-medium flex fill">
-          Creations
-        </a>
-      </li>
-    </ul>`
-    ,
-    replaceWith:
-    `<ul id="horizontal-tabs" class="nav nav-tabs" role="tablist" profile-tab-click="">
-      <li class="rbx-tab active">
-        <a class="rbx-tab-heading" href="#about" id="tab-about">
-          <span class="text-lead">About</span>
-          <span class="rbx-tab-subtitle"></span>
-        </a>
-      </li>
-      <li class="rbx-tab">
-        <a class="rbx-tab-heading" href="#creations" id="tab-creations">
-          <span class="text-lead">Creations</span>
-          <span class="rbx-tab-subtitle"></span>
-        </a>
-      </li>
-    </ul>`
-  }
-
 ];
 
 
@@ -279,7 +247,6 @@ color_replacements.forEach(rep => replaceColor([rep]));
 replaceText(text_replacements);
 replaceClass(class_replacements);
 
-deleteElement();
 changeFavicon("./favicon.ico");
 
 if (document.readyState === 'loading') {
