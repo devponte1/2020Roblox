@@ -153,7 +153,7 @@ body,
 /* ==================== - SEARCH / INPUTS - ==================== */
 
 
-.input-group {
+.input-group:not(.navbar-search .input-group) {
     background-color: var(--color-bg-input) !important;
     color: var(--color-text-primary) !important;
 }
@@ -170,6 +170,10 @@ body,
 
 .form-control.input-field {
     background-color: var(--color-bg-input) !important;
+}
+
+.input-group *:not(input):not(textarea):not(select) {
+    background-color: transparent !important;
 }
 
 
