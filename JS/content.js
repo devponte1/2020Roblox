@@ -199,8 +199,11 @@ const class_replacements = [
 //icon-follow-game
 
 
-const element_replacements = [
-
+const elementType_replacements = [
+    {
+        toReplace: ".text-label",
+        replaceWith: "p"
+    },
 ];
 
 
@@ -246,6 +249,7 @@ img_replacements.forEach(rep => replaceImage(rep.toReplace, rep.replaceWith));
 color_replacements.forEach(rep => replaceColor([rep]));
 replaceText(text_replacements);
 replaceClass(class_replacements);
+replaceElementType(elementType_replacements);
 
 deleteElement();
 changeFavicon("./favicon.ico");
@@ -419,7 +423,7 @@ function replaceClass(replacements) {
 
     const observer = new MutationObserver(mutations => {
       mutations.forEach(m => {
-        // added nodes
+
         m.addedNodes.forEach(node => {
           if (node instanceof HTMLElement) {
             processElement(node);
@@ -442,6 +446,129 @@ function replaceClass(replacements) {
     });
   });
 }
+
+
+function replaceElementType(selector, newTag) {
+    let elements
+
+    if (Array.isArray(selector)) {
+        elements = selector
+    } else if (typeof selector === "string") {
+        elements = document.querySelectorAll(selector)
+    } else return
+
+    elements.forEach(el => {
+        const newEl = document.createElement(newTag)
+
+        for (const attr of el.attributes) {
+            newEl.setAttribute(attr.name, attr.value)
+        }
+
+        while (el.firstChild) {
+            newEl.appendChild(el.firstChild)
+        }
+
+        el.parentNode.replaceChild(newEl, el)
+    })
+}
+
+
+function deleteElement(maxAttempts = 10, delay = 500) {
+  let attempts = 0;
+
+  const handledEntries = new Set();
+
+  function performDeletion() {
+    deleteElements.forEach((entry, idx) => {
+
+      if (handledEntries.has(idx)) return;
+
+      let nodes = [];
+
+
+      if (entry.classToDelete) {
+        const parentNodes = document.querySelectorAll(entry.selector);
+        parentNodes.forEach(parent => {
+          const childNodes = parent.querySelectorAll(`.${entry.classToDelete}`);
+          nodes.push(...childNodes);
+        });
+      } else {
+        nodes = Array.from(document.querySelectorAll(entry.selector));
+      }
+
+      if (nodes.length === 0) return; // skip if nothing found
+
+      let toDelete;
+      if (entry.deleteAll) {
+        toDelete = nodes.filter(node => !node.dataset._deleted);
+      } else {
+        toDelete = nodes
+          .slice(entry.startIndex, entry.startIndex + entry.count)
+          .filter(node => !node.dataset._deleted);
+      }
+
+      if (toDelete.length === 0) return;
+      toDelete.forEach((node, index) => {
+        node.dataset._deleted = "true";
+        node.remove();
+        console.log(
+          `Removed: ${entry.classToDelete || entry.selector} at index ${
+            entry.deleteAll ? index : entry.startIndex + index
+          }`
+        );
+      });
+
+      handledEntries.add(idx);
+    });
+
+    if (handledEntries.size === deleteElements.length) {
+      clearInterval(interval);
+      console.log("All targeted elements deleted. Stopping retries.");
+    }
+  }
+
+  const interval = setInterval(() => {
+    performDeletion();
+    attempts++;
+
+    if (attempts >= maxAttempts) {
+      clearInterval(interval);
+      console.log("deleteElement finished running (max attempts reached).");
+    }
+  }, delay);
+}
+
+
+// ==================== - REVERT 2022+ UPDATES - ========================= //
+
+
+function changeFavicon(iconURL) {
+    if (typeof iconURL !== "string" || !iconURL.trim()) return;
+    const lower = iconURL.trim().toLowerCase();
+    if (lower.startsWith("javascript:") || lower.startsWith("data:")) return;
+
+    const testURL = iconURL + "?v=" + Date.now();
+
+    fetch(testURL, { method: "HEAD" })
+        .then(res => {
+            if (!res.ok) return;
+            let link = document.querySelector("link[rel~='icon']");
+            if (!link) {
+                link = document.createElement("link");
+                link.rel = "icon";
+                document.head.appendChild(link);
+            }
+            link.type = "image/x-icon";
+            link.href = testURL;
+            document.querySelectorAll("link[rel*='icon']").forEach(l => {
+                if (l !== link) l.remove();
+            });
+        })
+        .catch(() => {});
+}
+
+
+// ==================== - EXPERIMENTAL - ========================= //
 
 
 function replaceElement(replacements) {
@@ -515,11 +642,9 @@ function replaceElement(replacements) {
       return;
     }
 
-    // --- FIX SECTION: ensure entire element can be replaced if top-level ---
     if (targetEl.parentNode && replacementEl.tagName === targetEl.tagName) {
       const newEl = replacementEl.cloneNode(true);
 
-      // preserve dataset + event listeners parent may rely on
       Array.from(targetEl.attributes).forEach(a =>
         targetEl.removeAttribute(a.name)
       );
@@ -532,117 +657,9 @@ function replaceElement(replacements) {
 
       return;
     }
-
-    // if tag differs (e.g., replacing <ul> with another <ul> but new attrs), replace fully
+    
     if (targetEl.parentNode) {
       targetEl.parentNode.replaceChild(replacementEl, targetEl);
     }
   });
 }
-
-
-function deleteElement(maxAttempts = 10, delay = 500) {
-  let attempts = 0;
-
-  // Track which entries have already been fully handled
-  const handledEntries = new Set();
-
-  function performDeletion() {
-    deleteElements.forEach((entry, idx) => {
-      // Skip if this entry has already been deleted successfully
-      if (handledEntries.has(idx)) return;
-
-      let nodes = [];
-
-      // If a classToDelete is specified, find those child elements inside the selector
-      if (entry.classToDelete) {
-        const parentNodes = document.querySelectorAll(entry.selector);
-        parentNodes.forEach(parent => {
-          const childNodes = parent.querySelectorAll(`.${entry.classToDelete}`);
-          nodes.push(...childNodes);
-        });
-      } else {
-        // Otherwise, use the selector directly
-        nodes = Array.from(document.querySelectorAll(entry.selector));
-      }
-
-      if (nodes.length === 0) return; // skip if nothing found
-
-      let toDelete;
-      if (entry.deleteAll) {
-        toDelete = nodes.filter(node => !node.dataset._deleted);
-      } else {
-        toDelete = nodes
-          .slice(entry.startIndex, entry.startIndex + entry.count)
-          .filter(node => !node.dataset._deleted);
-      }
-
-      // If nothing to delete yet, skip for now
-      if (toDelete.length === 0) return;
-
-      // Perform the deletion(s)
-      toDelete.forEach((node, index) => {
-        node.dataset._deleted = "true";
-        node.remove();
-        console.log(
-          `Removed: ${entry.classToDelete || entry.selector} at index ${
-            entry.deleteAll ? index : entry.startIndex + index
-          }`
-        );
-      });
-
-      // Mark this entry as fully handled so it won't repeat in later retries
-      handledEntries.add(idx);
-    });
-
-    // Stop retrying early if everything has been deleted
-    if (handledEntries.size === deleteElements.length) {
-      clearInterval(interval);
-      console.log("All targeted elements deleted. Stopping retries.");
-    }
-  }
-
-  // Run repeatedly (to catch dynamically loaded elements)
-  const interval = setInterval(() => {
-    performDeletion();
-    attempts++;
-
-    // Stop retrying after maxAttempts even if not all were found
-    if (attempts >= maxAttempts) {
-      clearInterval(interval);
-      console.log("deleteElement finished running (max attempts reached).");
-    }
-  }, delay);
-}
-
-
-// ==================== - REVERT 2022+ UPDATES - ========================= //
-
-
-function changeFavicon(iconURL) {
-    if (typeof iconURL !== "string" || !iconURL.trim()) return;
-    const lower = iconURL.trim().toLowerCase();
-    if (lower.startsWith("javascript:") || lower.startsWith("data:")) return;
-
-    const testURL = iconURL + "?v=" + Date.now();
-
-    fetch(testURL, { method: "HEAD" })
-        .then(res => {
-            if (!res.ok) return;
-            let link = document.querySelector("link[rel~='icon']");
-            if (!link) {
-                link = document.createElement("link");
-                link.rel = "icon";
-                document.head.appendChild(link);
-            }
-            link.type = "image/x-icon";
-            link.href = testURL;
-            document.querySelectorAll("link[rel*='icon']").forEach(l => {
-                if (l !== link) l.remove();
-            });
-        })
-        .catch(() => {});
-}
-
-
-// ==================== - EXPERIMENTAL - ========================= //
