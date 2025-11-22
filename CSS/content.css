@@ -98,7 +98,7 @@
 }
 
 .rbx-header .navbar-search .input-group {
-    overflow: hidden;
+    overflow: hidden !important;
     background-color: transparent !important;
 }
 

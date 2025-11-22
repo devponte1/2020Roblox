@@ -214,6 +214,7 @@ const deleteElements = [
     count: 1,
     deleteAll: false
   },
+
   {
     selector: ".rbx-event-icon",
     deleteAll: true
@@ -222,10 +223,16 @@ const deleteElements = [
     selector: ".btn-generic-edit-sm.rg-copy-button",
     deleteAll: true
   },
+
   {
     selector: ".game-age-recommendation-details-container",
     deleteAll: true
   },
+  {
+    selector: ".container-list.sponsored-layer.recommendations-container",
+    deleteAll: true
+  },
+
   {
     selector: ".search-landing-container",
     deleteAll: true
@@ -449,93 +456,96 @@ function replaceClass(replacements) {
 
 
 function replaceElementType(selector, newTag) {
-    let elements
+    let elements;
 
     if (Array.isArray(selector)) {
-        elements = selector
+        elements = selector;
     } else if (typeof selector === "string") {
-        elements = document.querySelectorAll(selector)
-    } else return
+        elements = document.querySelectorAll(selector);
+    } else return;
 
     elements.forEach(el => {
-        const newEl = document.createElement(newTag)
+        if (!el || !el.parentNode) return;
+
+        const newEl = document.createElement(newTag);
 
         for (const attr of el.attributes) {
-            newEl.setAttribute(attr.name, attr.value)
+            newEl.setAttribute(attr.name, attr.value);
         }
 
         while (el.firstChild) {
-            newEl.appendChild(el.firstChild)
+            newEl.appendChild(el.firstChild);
         }
 
-        el.parentNode.replaceChild(newEl, el)
-    })
+        el.parentNode.replaceChild(newEl, el);
+    });
 }
 
 
 function deleteElement(maxAttempts = 10, delay = 500) {
-  let attempts = 0;
+    let attempts = 0;
+    const handledEntries = new Set();
 
-  const handledEntries = new Set();
+    function performDeletion() {
+        deleteElements.forEach((entry, idx) => {
+            if (handledEntries.has(idx)) return;
 
-  function performDeletion() {
-    deleteElements.forEach((entry, idx) => {
+            let nodes = [];
 
-      if (handledEntries.has(idx)) return;
+            if (entry.classToDelete) {
+                const parentNodes = document.querySelectorAll(entry.selector);
+                parentNodes.forEach(parent => {
+                    const childNodes = parent.querySelectorAll(`.${entry.classToDelete}`);
+                    nodes.push(...childNodes);
+                });
+            } else {
+                nodes = Array.from(document.querySelectorAll(entry.selector));
+            }
 
-      let nodes = [];
+            if (nodes.length === 0) return;
 
+            let toDelete;
+            if (entry.deleteAll) {
+                toDelete = nodes.filter(node => !node.dataset._deleted);
+            } else {
+                toDelete = nodes
+                    .slice(entry.startIndex, entry.startIndex + entry.count)
+                    .filter(node => !node.dataset._deleted);
+            }
 
-      if (entry.classToDelete) {
-        const parentNodes = document.querySelectorAll(entry.selector);
-        parentNodes.forEach(parent => {
-          const childNodes = parent.querySelectorAll(`.${entry.classToDelete}`);
-          nodes.push(...childNodes);
+            if (toDelete.length === 0) return;
+
+            toDelete.forEach((node, index) => {
+                if (!node || !node.parentNode) return;
+
+                node.dataset._deleted = "true";
+                node.remove();
+
+                console.log(
+                    `Removed: ${entry.classToDelete || entry.selector} at index ${
+                        entry.deleteAll ? index : entry.startIndex + index
+                    }`
+                );
+            });
+
+            handledEntries.add(idx);
         });
-      } else {
-        nodes = Array.from(document.querySelectorAll(entry.selector));
-      }
 
-      if (nodes.length === 0) return; // skip if nothing found
-
-      let toDelete;
-      if (entry.deleteAll) {
-        toDelete = nodes.filter(node => !node.dataset._deleted);
-      } else {
-        toDelete = nodes
-          .slice(entry.startIndex, entry.startIndex + entry.count)
-          .filter(node => !node.dataset._deleted);
-      }
-
-      if (toDelete.length === 0) return;
-      toDelete.forEach((node, index) => {
-        node.dataset._deleted = "true";
-        node.remove();
-        console.log(
-          `Removed: ${entry.classToDelete || entry.selector} at index ${
-            entry.deleteAll ? index : entry.startIndex + index
-          }`
-        );
-      });
-
-      handledEntries.add(idx);
-    });
-
-    if (handledEntries.size === deleteElements.length) {
-      clearInterval(interval);
-      console.log("All targeted elements deleted. Stopping retries.");
+        if (handledEntries.size === deleteElements.length) {
+            clearInterval(interval);
+            console.log("All targeted elements deleted. Stopping retries.");
+        }
     }
-  }
 
-  const interval = setInterval(() => {
-    performDeletion();
-    attempts++;
+    const interval = setInterval(() => {
+        performDeletion();
+        attempts++;
 
-    if (attempts >= maxAttempts) {
-      clearInterval(interval);
-      console.log("deleteElement finished running (max attempts reached).");
-    }
-  }, delay);
+        if (attempts >= maxAttempts) {
+            clearInterval(interval);
+            console.log("deleteElement finished running (max attempts reached).");
+        }
+    }, delay);
 }
 
 
