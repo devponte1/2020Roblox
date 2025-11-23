@@ -1,5 +1,6 @@
 //content.js
 
+
 // ==== VARIABLES ==== //
 
 const img_replacements = [
@@ -46,9 +47,7 @@ const text_replacements = [
   { toReplace: "People", replaceWith: 'Players' },
   { toReplace: "Connect", replaceWith: 'Friends' },
   { toReplace: "Connections", replaceWith: 'Friends' },
-  { toReplace: "connections", replaceWith: 'friends' },
   { toReplace: "Connection", replaceWith: 'Friend' },
-  { toReplace: "connection", replaceWith: 'friend' },
   { toReplace: "Remove Connection", replaceWith: 'Unfriend' },
   { toReplace: "Experiences", replaceWith: 'Games' },
   { toReplace: "Experience", replaceWith: 'Game' },
@@ -190,7 +189,11 @@ const class_replacements = [
         replaceWith: "section-content"
     },
 
-    
+//    {
+//        toReplace: "row home-container expand-max-width",
+//        replaceWith: "row home-container"
+//    },
+
 ];
 
 //#profile-header-container > div > div.profile-header-details > ul > li:nth-child(1) > a > span > b
@@ -234,7 +237,7 @@ const deleteElements = [
   },
 
   {
-    selector: ".search-landing-container",
+    selector: ".search-landing-root",
     deleteAll: true
   },
   {
@@ -243,6 +246,11 @@ const deleteElements = [
   },
   {
     selector: ".search-overlay search-overlay-show",
+    deleteAll: true
+  },
+
+  {
+    selector: ".profile-store",
     deleteAll: true
   },
 

@@ -208,6 +208,10 @@ nav.nav-tabs {
     background-color: var(--color-bg-surface) !important;
 }
 
+.menu-vertical {
+    background-color: var(--color-bg-surface) !important;
+}
+
 .item-list-container.layer {
     background-color: var(--color-bg-header) !important;
 }
@@ -246,6 +250,10 @@ background-color: var(--color-bg-item) !important;
     background-color: var(--color-bg-surface) !important;
 }
 
+.humbnail-holder.asset-thumb-container {
+    background-color: var(--color-bg-header) !important;
+}
+
 .container-list.layer.recommendations-container {
     background-color: var(--color-bg-header) !important;
 }
@@ -274,6 +282,10 @@ section.profile-header.ng-isolate-scope {
     background-color: var(--color-bg-header) !important;
 }
 
+.profile-avatar-mask {
+    background-color: var(--color-bg-surface) !important;
+}
+
 .dialog-message.message-is-sending {
  background-color: var(--color-bg-surface) !important;
 }
@@ -282,9 +294,23 @@ section.profile-header.ng-isolate-scope {
  background-color: var(--color-bg-surface) !important;
 }
 
+.roblox-message-row.ng-scope.unread {
+ background-color: var(--color-bg-header) !important;
+}
+
 .rbx-platform-event-thumbnail {
     border-radius: 0px !important;
 }
+
+
+/* ==================== - SETTINGS PAGE - ==================== */
+
+
+.setting-section {
+    background-color: var(--color-bg-surface) !important;
+}
+
+
 
 
 /* ==================== - NEW FEATURES BUT WITH THE THEME - ==================== */
