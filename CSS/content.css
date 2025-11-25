@@ -230,6 +230,14 @@ background-color: var(--color-bg-item) !important;
  background-color: var(--color-bg-item) !important;
 }
 
+.item-details-thumbnail-container > div.thumbnail-holder[class="thumbnail-holder"] > .thumbnail-2d-container {
+    background-color: var(--color-bg-surface) !important;
+}
+
+.humbnail-holder.asset-thumb-container {
+    background-color: var(--color-bg-header) !important;
+}
+
 
 /* ==================== - SCROLLERS - ==================== */ 
 
@@ -250,8 +258,12 @@ background-color: var(--color-bg-item) !important;
     background-color: var(--color-bg-surface) !important;
 }
 
-.humbnail-holder.asset-thumb-container {
-    background-color: var(--color-bg-header) !important;
+/*.section-content.ng-scope {
+    background-color: var(--color-bg-surface) !important;
+}*/
+
+.setting-section {
+    background-color: var(--color-bg-surface) !important;
 }
 
 .container-list.layer.recommendations-container {
@@ -303,16 +315,6 @@ section.profile-header.ng-isolate-scope {
 }
 
 
-/* ==================== - SETTINGS PAGE - ==================== */
-
-
-.setting-section {
-    background-color: var(--color-bg-surface) !important;
-}
-
-
-
-
 /* ==================== - NEW FEATURES BUT WITH THE THEME - ==================== */
 
 
@@ -322,4 +324,14 @@ section.profile-header.ng-isolate-scope {
 
 .avatar.avatar-headshot-md.player-avatar.hidden-players-placeholder {
     background-color: var(--color-bg-surface) !important;
+}
+
+.group-wall-deprecation-notice {
+    background-color: var(--color-bg-surface) !important;
+    border-radius: 0px;
+}
+
+.group-section-content {
+    background-color: var(--color-bg-surface) !important;
+    border-radius: 0px;
 }
