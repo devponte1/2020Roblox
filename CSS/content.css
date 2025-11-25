@@ -328,10 +328,14 @@ section.profile-header.ng-isolate-scope {
 
 .group-wall-deprecation-notice {
     background-color: var(--color-bg-surface) !important;
-    border-radius: 0px;
+    border-radius: 0px !important;
 }
 
 .group-section-content {
     background-color: var(--color-bg-surface) !important;
-    border-radius: 0px;
+    border-radius: 0px !important;
+}
+
+section.group-forums {
+    background-color: var(--color-bg-surface) !important;
 }
