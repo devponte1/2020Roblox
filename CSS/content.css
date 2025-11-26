@@ -266,6 +266,16 @@ background-color: var(--color-bg-item) !important;
     background-color: var(--color-bg-surface) !important;
 }
 
+.container-empty {
+    background-color: var(--color-bg-surface) !important;
+}
+
+.signup-container.theme-bg.rbx-login-form {
+    background-color: hsla(0,0%,100%,.8) !important;
+    color: #000000 !important;
+    border-radius: 0px !important;
+}
+
 .container-list.layer.recommendations-container {
     background-color: var(--color-bg-header) !important;
 }
@@ -338,4 +348,63 @@ section.profile-header.ng-isolate-scope {
 
 section.group-forums {
     background-color: var(--color-bg-surface) !important;
+}
+
+
+
+
+
+
+
+
+.rbx-header .rbx-navbar-right-nav {
+    -webkit-text-size-adjust: 100% !important;
+    --wm-toolbar-height: 1px !important;
+    color: #393b3d !important;
+    font-family: HCo Gotham SSm, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif !important;
+    font-size: 16px !important;
+    font-weight: 400 !important;
+    line-height: 1.4em !important;
+    box-sizing: border-box !important;
+    text-rendering: auto !important;
+    -webkit-font-smoothing: antialiased !important;
+    padding: 0 !important;
+    list-style: none !important;
+    margin: 0 !important;
+    display: flex !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+    gap: 8px !important;
+}
+
+.rbx-header .rbx-navbar-right-nav li {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Login button */
+.rbx-header .rbx-navbar-right-nav li.login-action a.rbx-navbar-login {
+    vertical-align: middle !important;
+    color: rgba(0,0,0,.5) !important;
+}
+
+.dark-theme .rbx-header .rbx-navbar-right-nav li.login-action a.rbx-navbar-login {
+    color: hsla(0,0%,100%,.7) !important;
+}
+
+/* Signup button */
+.rbx-header .rbx-navbar-right-nav li.signup-button-container {
+    margin-left: 20px !important;
+    margin-right: 3px !important;
+}
+
+.rbx-header .rbx-navbar-right-nav li.signup-button-container a.rbx-navbar-signup {
+    background: #02b757 !important;
+    border-radius: 3px !important;
+}
+
+.rbx-header .rbx-navbar-right-nav li.signup-button-container a.signup-button:focus,
+.rbx-header .rbx-navbar-right-nav li.signup-button-container a.signup-button:hover {
+    border-radius: 3px !important;
+    background: #3fc679 !important;
 }

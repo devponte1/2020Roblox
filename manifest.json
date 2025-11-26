@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "2020 - 2022 Roblox Theme",
   "version": "1.0",
-  "description": "bring back the theme of roblox 2020-2022. the website's functionality stays mostly the same, but the theme is what changes.",
+  "description": "bring back the theme of roblox 2020-2022. the website's functionality stays mostly the same, but the theme is what changes. This extension tries to replicate how roblox looked like back in 2020-2022 era.",
   "permissions": ["scripting", "activeTab"],
   "host_permissions": ["https://*.roblox.com/*"],
   "content_scripts": [

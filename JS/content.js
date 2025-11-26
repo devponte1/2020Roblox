@@ -118,7 +118,6 @@ const class_replacements = [
         replaceWith: "btn-secondary-xs"
     },
 
-
     {
         toReplace: "profile-header-social-count-label",
         replaceWith: "text-label text-overflow font-caption-header"
